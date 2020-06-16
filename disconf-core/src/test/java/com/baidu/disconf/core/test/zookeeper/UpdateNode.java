@@ -20,12 +20,18 @@ public class UpdateNode {
 
     public static String disconfFileNode = "/disconf/disconf_demo_1_0_0_0_rd/file/redis.properties";
 
+    //add by hetw25334
+    public static String scheme = "";
+
+    public static String auth = "";
+
     private ResilientActiveKeyValueStore store;
     private Random random = new Random();
 
     public UpdateNode(String hosts) throws IOException, InterruptedException {
         store = new ResilientActiveKeyValueStore(true);
-        store.connect(hosts);
+        //store.connect(hosts);
+        store.connect(hosts,scheme,auth);
     }
 
     public void run() throws InterruptedException, KeeperException {

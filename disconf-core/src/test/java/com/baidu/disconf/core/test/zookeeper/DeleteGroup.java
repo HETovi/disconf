@@ -16,6 +16,12 @@ public class DeleteGroup extends ConnectionWatcher {
 
     public static String hosts = "127.0.0.1:8581,127.0.0.1:8582,127.0.0.1:8583";
 
+    //add by hetw25334
+    //Zookeeper ACL
+    public static String scheme = "";
+
+    public static String auth = "";
+
     /**
      * @param
      */
@@ -49,7 +55,8 @@ public class DeleteGroup extends ConnectionWatcher {
     public static void main(String[] args) throws Exception {
 
         DeleteGroup deleteGroup = new DeleteGroup();
-        deleteGroup.connect(hosts);
+        //deleteGroup.connect(hosts);
+        deleteGroup.connect(hosts,scheme,auth);
         deleteGroup.delete("/disconf");
         deleteGroup.close();
     }

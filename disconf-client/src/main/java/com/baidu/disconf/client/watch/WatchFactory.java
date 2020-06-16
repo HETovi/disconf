@@ -50,7 +50,9 @@ public class WatchFactory {
                                                                                                         .CONF_SERVER_ZOO_ACTION));
 
                         WatchMgr watchMgr = new WatchMgrImpl();
-                        watchMgr.init(hosts, zooPrefix, DisClientConfig.getInstance().DEBUG);
+                        //暂时不知道怎么获取scheme以及auth
+                        //add by hetw25334
+                        watchMgr.init(hosts, zooPrefix, DisClientConfig.getInstance().DEBUG,"","");
 
                         return watchMgr;
 

@@ -151,7 +151,8 @@
             <dependency>
                 <groupId>org.apache.zookeeper</groupId>
                 <artifactId>zookeeper</artifactId>
-                <version>3.3.6</version>
+                <!-- edit by hetw25334 升级ZK版本为3.4.14 原先为  3.3.6-->
+                <version>3.4.14</version>
                 <exclusions>
                     <exclusion>
                         <groupId>com.sun.jmx</groupId>
@@ -465,13 +466,16 @@
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-nop</artifactId>
-                <version>1.7.6</version>
+                <!-- 修改版本为1.5.8试试 -->
+                <!--<version>1.7.6</version>-->
+                <version>1.5.8</version>
             </dependency>
 
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
-                <version>1.7.6</version>
+                <!--<version>1.7.6</version>-->
+                <version>1.5.8</version>
             </dependency>
 
             <dependency>
@@ -519,7 +523,9 @@
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-log4j12</artifactId>
-                <version>1.4.3</version>
+                <!-- 修改版本为1.5.6试试 -->
+                <!--<version>1.4.3</version>-->
+                <version>1.5.6</version>
             </dependency>
 
         </dependencies>
@@ -567,6 +573,7 @@
                             <exclude>**/*Form.class</exclude>
                         </excludes>
                     </instrumentation>
+                    <check/>
                 </configuration>
                 <executions>
                     <execution>
@@ -682,6 +689,11 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <additionalOptions>
+                        <additionalOption>-Xdoclint:none</additionalOption>
+                    </additionalOptions>
+                </configuration>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>

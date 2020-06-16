@@ -52,6 +52,9 @@
           class="com.baidu.disconf.web.service.zookeeper.config.ZooConfig">
         <property name="zooHosts" value="${hosts}"/>
         <property name="zookeeperUrlPrefix" value="${zookeeper_url_prefix}"/>
+        <!-- add by hetw25334 增加ZooKeeper ACL 策略设置 -->
+        <property name="addAuth" value="${zookeeper_addAuth}"/>
+        <property name="scheme" value="${zookeeper_scheme}"/>
     </bean>
 
     <bean id="applicationPropertyConfig"

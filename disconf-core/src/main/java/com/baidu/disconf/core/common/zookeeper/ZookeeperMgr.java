@@ -31,17 +31,16 @@ public class ZookeeperMgr {
 
     /**
      * @return void
-     *
      * @throws Exception
      * @Description: 初始化
      * @author liaoqiqi
      * @date 2013-6-14
      */
-    public void init(String host, String defaultPrefixString, boolean debug) throws Exception {
+    public void init(String host, String defaultPrefixString, boolean debug, String scheme, String auth) throws Exception {
 
         try {
 
-            initInternal(host, defaultPrefixString, debug);
+            initInternal(host, defaultPrefixString, debug, scheme, auth);
 
             LOGGER.debug("ZookeeperMgr init.");
 
@@ -81,21 +80,21 @@ public class ZookeeperMgr {
 
     /**
      * @return void
-     *
      * @throws IOException
      * @throws InterruptedException
      * @Description: 初始化
      * @author liaoqiqi
      * @date 2013-6-14
      */
-    private void initInternal(String hosts, String defaultPrefixString, boolean debug)
+    private void initInternal(String hosts, String defaultPrefixString, boolean debug, String scheme, String auth)
             throws IOException, InterruptedException {
 
         curHost = hosts;
         curDefaultPrefixString = defaultPrefixString;
 
         store = new ResilientActiveKeyValueStore(debug);
-        store.connect(hosts);
+        //edit by hetw25334
+        store.connect(hosts, scheme, auth);
 
         LOGGER.info("zoo prefix: " + defaultPrefixString);
 
@@ -131,7 +130,6 @@ public class ZookeeperMgr {
 
     /**
      * @return void
-     *
      * @Description: 应用程序必须调用它来释放zookeeper资源
      * @author liaoqiqi
      * @date 2013-6-14
@@ -143,7 +141,6 @@ public class ZookeeperMgr {
 
     /**
      * @return List<String>
-     *
      * @Description: 获取子孩子 列表
      * @author liaoqiqi
      * @date 2013-6-14
@@ -155,7 +152,6 @@ public class ZookeeperMgr {
 
     /**
      * @return List<String>
-     *
      * @Description: 写持久化结点, 没有则新建, 存在则进行更新
      * @author liaoqiqi
      * @date 2013-6-14
@@ -167,7 +163,6 @@ public class ZookeeperMgr {
 
     /**
      * @return List<String>
-     *
      * @Description: 读结点数据
      * @author liaoqiqi
      * @date 2013-6-14
@@ -205,9 +200,7 @@ public class ZookeeperMgr {
      * @param path
      * @param watcher
      * @param stat
-     *
      * @return String
-     *
      * @throws InterruptedException
      * @throws KeeperException
      * @Description: 带状态信息的读取数据
@@ -221,9 +214,7 @@ public class ZookeeperMgr {
 
     /**
      * @param path
-     *
      * @return void
-     *
      * @Description: 删除结点
      * @author liaoqiqi
      * @date 2013-6-17

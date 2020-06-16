@@ -17,7 +17,8 @@ public interface WatchMgr {
      *
      * @throws Exception
      */
-    void init(String hosts, String zooUrlPrefix, boolean debug) throws Exception;
+    //edit by hetw25334
+    void init(String hosts, String zooUrlPrefix, boolean debug,String scheme,String auth) throws Exception;
 
     /**
      * 监控路径,监控前会事先创建路径,并且会新建一个自己的Temp子结点

@@ -38,13 +38,13 @@ public class WatchMgrImpl implements WatchMgr {
     /**
      * @Description: 获取自己的主备类型
      */
-    public void init(String hosts, String zooUrlPrefix, boolean debug) throws Exception {
+    public void init(String hosts, String zooUrlPrefix, boolean debug,String scheme,String auth) throws Exception {
 
         this.zooUrlPrefix = zooUrlPrefix;
         this.debug = debug;
-
+        // add by hetw25334
         // init zookeeper
-        ZookeeperMgr.getInstance().init(hosts, zooUrlPrefix, debug);
+        ZookeeperMgr.getInstance().init(hosts, zooUrlPrefix, debug,scheme,auth);
     }
 
     /**

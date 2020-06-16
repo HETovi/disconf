@@ -15,9 +15,10 @@ public class ConfigWatcher implements Watcher {
 
     private ResilientActiveKeyValueStore store;
 
-    public ConfigWatcher(String hosts) throws IOException, InterruptedException {
+    //add by hetw25334
+    public ConfigWatcher(String hosts,String scheme,String auth) throws IOException, InterruptedException {
         store = new ResilientActiveKeyValueStore(true);
-        store.connect(hosts);
+        store.connect(hosts,scheme,auth);
     }
 
     public void displayConfig() throws InterruptedException, KeeperException {
@@ -44,7 +45,7 @@ public class ConfigWatcher implements Watcher {
 
     public static void main(String[] args) throws Exception {
 
-        ConfigWatcher configWatcher = new ConfigWatcher(args[0]);
+        ConfigWatcher configWatcher = new ConfigWatcher(args[0],args[1],args[2]);
         configWatcher.displayConfig();
 
         // stay alive until process is killed or thread is interrupted

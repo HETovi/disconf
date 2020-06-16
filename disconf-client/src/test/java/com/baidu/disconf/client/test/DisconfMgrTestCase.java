@@ -68,7 +68,8 @@ public class DisconfMgrTestCase extends BaseSpringMockTestCase implements Applic
 
                 // Watch 模块
                 final WatchMgr watchMgr = new WatchMgrMock().getMockInstance();
-                watchMgr.init("", "", true);
+                //edit by hetw25334
+                watchMgr.init("", "", true,"","");
 
                 // registry
                 DisconfCoreMgr disconfCoreMgr = new DisconfCoreMgrImpl(watchMgr, fetcherMgr,

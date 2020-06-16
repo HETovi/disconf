@@ -17,9 +17,10 @@ public class ConfigUpdater {
     private ResilientActiveKeyValueStore store;
     private Random random = new Random();
 
-    public ConfigUpdater(String hosts) throws IOException, InterruptedException {
+    //add by hetw25334
+    public ConfigUpdater(String hosts,String scheme,String auth) throws IOException, InterruptedException {
         store = new ResilientActiveKeyValueStore(true);
-        store.connect(hosts);
+        store.connect(hosts,scheme,auth);
     }
 
     public void run() throws InterruptedException, KeeperException {
@@ -34,7 +35,7 @@ public class ConfigUpdater {
 
     public static void main(String[] args) throws Exception {
 
-        ConfigUpdater configUpdater = new ConfigUpdater(args[0]);
+        ConfigUpdater configUpdater = new ConfigUpdater(args[0],args[1],args[2]);
         configUpdater.run();
     }
 }

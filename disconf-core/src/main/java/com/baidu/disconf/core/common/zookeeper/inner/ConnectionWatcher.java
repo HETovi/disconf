@@ -1,9 +1,6 @@
 package com.baidu.disconf.core.common.zookeeper.inner;
 
-import java.io.IOException;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
-
+import org.apache.commons.lang3.StringUtils;
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.Watcher.Event.KeeperState;
@@ -11,6 +8,11 @@ import org.apache.zookeeper.ZooKeeper;
 import org.apache.zookeeper.ZooKeeper.States;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 连接管理
@@ -31,9 +33,16 @@ public class ConnectionWatcher implements Watcher {
     private CountDownLatch connectedSignal = new CountDownLatch(1);
 
     private static String internalHost = "";
+    //add by hetw25334
+    private static String internalScheme = "";
+
+    private static String internalAuth = "";
 
     // 是否调试状态
     private boolean debug = false;
+
+
+
 
     /**
      * @param debug
@@ -44,24 +53,53 @@ public class ConnectionWatcher implements Watcher {
 
     /**
      * @param hosts
-     *
+     * @param scheme
+     * @param auth
      * @return void
-     *
      * @throws IOException
      * @throws InterruptedException
      * @Description: 连接ZK
      * @author liaoqiqi
      * @date 2013-6-14
      */
-    public void connect(String hosts) throws IOException, InterruptedException {
+    public void connect(String hosts, String scheme, String auth) throws IOException, InterruptedException {
         internalHost = hosts;
+        internalScheme = scheme;
+        internalAuth = auth;
         zk = new ZooKeeper(internalHost, SESSION_TIMEOUT, this);
+        // 在这里增加ZK AUTH 信息
+        // add by hetw25334
+        if (!StringUtils.isBlank(internalScheme) && !StringUtils.isBlank(internalAuth)){
+            //auth由,分隔
+            String []auths = internalAuth.split(",");
+            for(String realAuth:auths){
+                zk.addAuthInfo(internalScheme, realAuth.getBytes(Charset.forName("UTF-8")));
+            }
+        }
 
         // 连接有超时哦
         connectedSignal.await(CONNECT_TIMEOUT, TimeUnit.MILLISECONDS);
 
         LOGGER.info("zookeeper: " + hosts + " , connected.");
     }
+
+    /**
+     * @param hosts
+     * @return void
+     * @throws IOException
+     * @throws InterruptedException
+     * @Description: 连接ZK
+     * @author liaoqiqi
+     * @date 2013-6-14
+     */
+    /*public void connect(String hosts) throws IOException, InterruptedException {
+        internalHost = hosts;
+        zk = new ZooKeeper(internalHost, SESSION_TIMEOUT, this);
+        // 连接有超时哦
+        connectedSignal.await(CONNECT_TIMEOUT, TimeUnit.MILLISECONDS);
+
+        LOGGER.info("zookeeper: " + hosts + " , connected.");
+    }*/
 
     /**
      * 当连接成功时调用的
@@ -117,7 +155,8 @@ public class ConnectionWatcher implements Watcher {
 
                 close();
 
-                connect(internalHost);
+                //connect(internalHost);
+                connect(internalHost,internalScheme,internalAuth);
 
             } catch (Exception e) {
 
@@ -136,7 +175,6 @@ public class ConnectionWatcher implements Watcher {
 
     /**
      * @return void
-     *
      * @throws InterruptedException
      * @Description: 关闭
      * @author liaoqiqi

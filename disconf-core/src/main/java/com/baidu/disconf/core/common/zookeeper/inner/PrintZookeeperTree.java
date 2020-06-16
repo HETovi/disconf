@@ -73,13 +73,14 @@ public class PrintZookeeperTree extends ConnectionWatcher {
 
     public static void main(String[] args) throws Exception {
 
-        if (args == null || args.length != 1) {
+        if (args == null || args.length != 3) {
             LOGGER.error("PrintZookeeperTree argu error!");
             System.exit(2);
         }
 
         PrintZookeeperTree printZookeeperTree = new PrintZookeeperTree();
-        printZookeeperTree.connect(args[0]);
+        //add by hetw25334
+        printZookeeperTree.connect(args[0],args[1],args[2]);
 
         Thread.sleep(2000);
 

@@ -324,8 +324,8 @@ public class ZookeeperDriverImpl implements ZooKeeperDriver, InitializingBean, D
     public synchronized void afterPropertiesSet() throws Exception {
 
         if (!isInit) {
-
-            ZookeeperMgr.getInstance().init(zooConfig.getZooHosts(), zooConfig.getZookeeperUrlPrefix(), false);
+            //add by hetw25334
+            ZookeeperMgr.getInstance().init(zooConfig.getZooHosts(), zooConfig.getZookeeperUrlPrefix(), false,zooConfig.getScheme(),zooConfig.getAddAuth());
             isInit = true;
         }
     }
