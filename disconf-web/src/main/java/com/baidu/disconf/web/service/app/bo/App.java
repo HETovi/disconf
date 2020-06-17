@@ -13,7 +13,8 @@ import com.github.knightliao.apollo.db.bo.BaseObject;
  * @author liaoqiqi
  * @version 2014-6-16
  */
-@Table(db = DB.DB_NAME, name = "app", keyColumn = Columns.APP_ID)
+//edit by hetw25334 修改表名信息 原先为app 现在为disconf_app
+@Table(db = DB.DB_NAME, name = "disconf_app", keyColumn = Columns.APP_ID)
 public class App extends BaseObject<Long> {
 
     protected static final Logger LOG = LoggerFactory.getLogger(App.class);

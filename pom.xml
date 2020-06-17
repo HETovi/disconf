@@ -152,7 +152,8 @@
                 <groupId>org.apache.zookeeper</groupId>
                 <artifactId>zookeeper</artifactId>
                 <!-- edit by hetw25334 升级ZK版本为3.4.14 原先为  3.3.6-->
-                <version>3.4.14</version>
+                <!--<version>3.4.14</version>-->
+                <version>3.3.6</version>
                 <exclusions>
                     <exclusion>
                         <groupId>com.sun.jmx</groupId>
@@ -233,6 +234,13 @@
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
                 <version>5.1.6</version>
+            </dependency>
+
+            <!-- 增加oracle的驱动包 add by hetw25334-->
+            <dependency>
+                <groupId>com.oracle</groupId>
+                <artifactId>ojdbc6</artifactId>
+                <version>11.2.0.4</version>
             </dependency>
 
             <dependency>
@@ -468,26 +476,28 @@
                 <artifactId>slf4j-nop</artifactId>
                 <!-- 修改版本为1.5.8试试 -->
                 <!--<version>1.7.6</version>-->
-                <version>1.5.8</version>
+                <version>1.7.22</version>
             </dependency>
 
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
                 <!--<version>1.7.6</version>-->
-                <version>1.5.8</version>
+                <version>1.7.22</version>
             </dependency>
 
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-core</artifactId>
-                <version>1.0.9</version>
+                <!--<version>1.0.9</version>-->
+                <version>1.1.11</version>
             </dependency>
 
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
-                <version>1.0.9</version>
+                <!--<version>1.0.9</version>-->
+                <version>1.1.11</version>
             </dependency>
 
             <dependency>
@@ -525,7 +535,7 @@
                 <artifactId>slf4j-log4j12</artifactId>
                 <!-- 修改版本为1.5.6试试 -->
                 <!--<version>1.4.3</version>-->
-                <version>1.5.6</version>
+                <version>1.7.22</version>
             </dependency>
 
         </dependencies>

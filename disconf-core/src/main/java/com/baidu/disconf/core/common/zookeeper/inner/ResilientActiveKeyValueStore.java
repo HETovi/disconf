@@ -9,6 +9,7 @@ import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooDefs.Ids;
+import org.apache.zookeeper.data.ACL;
 import org.apache.zookeeper.data.Stat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +27,7 @@ public class ResilientActiveKeyValueStore extends ConnectionWatcher {
     private static final Charset CHARSET = Charset.forName("UTF-8");
 
     // 最大重试次数
-    public static final int MAX_RETRIES = 3;
+    public static final int MAX_RETRIES = 10;
 
     // 每次重试超时时间
     public static final int RETRY_PERIOD_SECONDS = 2;
@@ -52,6 +53,7 @@ public class ResilientActiveKeyValueStore extends ConnectionWatcher {
      */
     public void write(String path, String value) throws InterruptedException, KeeperException {
 
+        //add by hetw25334 新增ACL配置
         int retries = 0;
         while (true) {
 
@@ -60,8 +62,8 @@ public class ResilientActiveKeyValueStore extends ConnectionWatcher {
                 Stat stat = zk.exists(path, false);
 
                 if (stat == null) {
-
-                    zk.create(path, value.getBytes(CHARSET), Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+                    zk.create(path, value.getBytes(CHARSET), Ids.CREATOR_ALL_ACL, CreateMode.PERSISTENT);
+                    //zk.create(path, value.getBytes(CHARSET), Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
 
                 } else {
 
@@ -112,8 +114,9 @@ public class ResilientActiveKeyValueStore extends ConnectionWatcher {
                 Stat stat = zk.exists(path, false);
 
                 if (stat == null) {
-
-                    return zk.create(path, value.getBytes(CHARSET), Ids.OPEN_ACL_UNSAFE, createMode);
+                    //add by hetw25334
+                    return zk.create(path, value.getBytes(CHARSET), Ids.CREATOR_ALL_ACL, createMode);
+                    //return zk.create(path, value.getBytes(CHARSET), Ids.OPEN_ACL_UNSAFE, createMode);
 
                 } else {
 

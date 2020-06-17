@@ -73,6 +73,7 @@ public class ConnectionWatcher implements Watcher {
             //auth由,分隔
             String []auths = internalAuth.split(",");
             for(String realAuth:auths){
+                System.out.println(realAuth);
                 zk.addAuthInfo(internalScheme, realAuth.getBytes(Charset.forName("UTF-8")));
             }
         }

@@ -6,11 +6,12 @@ import com.baidu.unbiz.common.genericdao.annotation.Column;
 import com.baidu.unbiz.common.genericdao.annotation.Table;
 import com.github.knightliao.apollo.db.bo.BaseObject;
 
+//edit by hetw25334 修改表名信息 原先为env 现在为disconf_env
 /**
  * @author liaoqiqi
  * @version 2014-6-16
  */
-@Table(db = DB.DB_NAME, name = "env", keyColumn = Columns.ENV_ID)
+@Table(db = DB.DB_NAME, name = "disconf_env", keyColumn = Columns.ENV_ID)
 public class Env extends BaseObject<Long> {
 
     /**

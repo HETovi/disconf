@@ -8,8 +8,9 @@ import com.github.knightliao.apollo.db.bo.BaseObject;
 
 import lombok.Data;
 
+//edit by hetw25334 修改表名信息 原先为config_history 现在为disconf_config_history
 @Data
-@Table(db = DB.DB_NAME, name = "config_history", keyColumn = "id")
+@Table(db = DB.DB_NAME, name = "disconf_config_history", keyColumn = "id")
 public class ConfigHistory extends BaseObject<Long> {
 
     /**
