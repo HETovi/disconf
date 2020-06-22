@@ -79,7 +79,8 @@ public class ZookeeperDriverImpl implements ZooKeeperDriver, InitializingBean, D
                 //
                 // 通知
                 //
-                ZookeeperMgr.getInstance().writePersistentUrl(path, value);
+                //增加ACL分支
+                ZookeeperMgr.getInstance().writePersistentUrl(path, value,zooConfig.getScheme(),zooConfig.getAddAuth());
             }
 
         } catch (Exception e) {

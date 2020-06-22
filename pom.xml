@@ -474,7 +474,6 @@
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-nop</artifactId>
-                <!-- 修改版本为1.5.8试试 -->
                 <!--<version>1.7.6</version>-->
                 <version>1.7.22</version>
             </dependency>

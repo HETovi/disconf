@@ -99,22 +99,24 @@ public class ZookeeperMgr {
         LOGGER.info("zoo prefix: " + defaultPrefixString);
 
         // 新建父目录
-        makeDir(defaultPrefixString, ZooUtils.getIp());
+        // add by hetw25334 新增ACL策略分支
+        makeDir(defaultPrefixString, ZooUtils.getIp(),scheme,auth);
     }
 
     /**
      * Zoo的新建目录
+     * add by hetw25334 新增ZK策略分支
      *
      * @param dir
      */
-    public void makeDir(String dir, String data) {
+    public void makeDir(String dir, String data,String scheme,String auth) {
 
         try {
 
             boolean deafult_path_exist = store.exists(dir);
             if (!deafult_path_exist) {
                 LOGGER.info("create: " + dir);
-                this.writePersistentUrl(dir, data);
+                this.writePersistentUrl(dir, data,scheme,auth);
             } else {
             }
 
@@ -156,9 +158,10 @@ public class ZookeeperMgr {
      * @author liaoqiqi
      * @date 2013-6-14
      */
-    public void writePersistentUrl(String url, String value) throws Exception {
+    // add by hetw25334 新增ZK策略分支
+    public void writePersistentUrl(String url, String value,String scheme,String auth) throws Exception {
 
-        store.write(url, value);
+        store.write(url, value,scheme,auth);
     }
 
     /**
@@ -191,9 +194,9 @@ public class ZookeeperMgr {
     /*
      * 生成一个临时结点
      */
-    public String createEphemeralNode(String path, String value, CreateMode createMode) throws Exception {
+    public String createEphemeralNode(String path, String value, CreateMode createMode,String scheme,String auth) throws Exception {
 
-        return store.createEphemeralNode(path, value, createMode);
+        return store.createEphemeralNode(path, value, createMode,scheme,auth);
     }
 
     /**

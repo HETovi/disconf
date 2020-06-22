@@ -23,11 +23,11 @@ public class ConfigUpdater {
         store.connect(hosts,scheme,auth);
     }
 
-    public void run() throws InterruptedException, KeeperException {
+    public void run(String scheme,String auth) throws InterruptedException, KeeperException {
 
         while (true) {
             String value = random.nextInt(100) + "";
-            store.write(PATH, value);
+            store.write(PATH, value,scheme,auth);
             System.out.printf("Set %s to %s\n", PATH, value);
             TimeUnit.SECONDS.sleep(random.nextInt(10));
         }
@@ -36,6 +36,6 @@ public class ConfigUpdater {
     public static void main(String[] args) throws Exception {
 
         ConfigUpdater configUpdater = new ConfigUpdater(args[0],args[1],args[2]);
-        configUpdater.run();
+        configUpdater.run(args[1],args[2]);
     }
 }

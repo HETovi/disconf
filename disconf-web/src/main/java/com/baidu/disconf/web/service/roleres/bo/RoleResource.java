@@ -10,7 +10,7 @@ import com.github.knightliao.apollo.db.bo.BaseObject;
  *
  */
 //edit by hetw25334 修改表名信息 原先为role_resource 现在为disconf_role_resource
-@Table(db = DB.DB_NAME, keyColumn = "role_res_id", name = "disconf_role_resource")
+@Table(db = DB.DB_NAME, keyColumn = "role_res_id", name = "role_resource")
 public class RoleResource extends BaseObject<Integer> {
 
     private static final long serialVersionUID = 1L;

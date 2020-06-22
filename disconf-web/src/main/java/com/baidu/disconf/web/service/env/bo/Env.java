@@ -11,7 +11,7 @@ import com.github.knightliao.apollo.db.bo.BaseObject;
  * @author liaoqiqi
  * @version 2014-6-16
  */
-@Table(db = DB.DB_NAME, name = "disconf_env", keyColumn = Columns.ENV_ID)
+@Table(db = DB.DB_NAME, name = "env", keyColumn = Columns.ENV_ID)
 public class Env extends BaseObject<Long> {
 
     /**

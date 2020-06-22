@@ -62,7 +62,7 @@ public class WatchMgrImpl implements WatchMgr {
         String clientRootZooPath = ZooPathMgr.getZooBaseUrl(zooUrlPrefix, disConfCommonModel.getApp(),
                 disConfCommonModel.getEnv(),
                 disConfCommonModel.getVersion());
-        ZookeeperMgr.getInstance().makeDir(clientRootZooPath, ZooUtils.getIp());
+        ZookeeperMgr.getInstance().makeDir(clientRootZooPath, ZooUtils.getIp(),"","");
 
         // 监控路径
         String monitorPath;
@@ -96,7 +96,7 @@ public class WatchMgrImpl implements WatchMgr {
      */
     private void makePath(String path, String data) {
 
-        ZookeeperMgr.getInstance().makeDir(path, data);
+        ZookeeperMgr.getInstance().makeDir(path, data,"","");
     }
 
     /**
@@ -108,7 +108,7 @@ public class WatchMgrImpl implements WatchMgr {
 
         String mainTypeFullStr = path + "/" + finerPrint;
         try {
-            ZookeeperMgr.getInstance().createEphemeralNode(mainTypeFullStr, data, CreateMode.EPHEMERAL);
+            ZookeeperMgr.getInstance().createEphemeralNode(mainTypeFullStr, data, CreateMode.EPHEMERAL,"","");
         } catch (Exception e) {
             LOGGER.error("cannot create: " + mainTypeFullStr + "\t" + e.toString());
         }

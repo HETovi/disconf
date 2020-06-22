@@ -37,7 +37,7 @@ public class UpdateNode {
     public void run() throws InterruptedException, KeeperException {
 
         String value = random.nextInt(100) + "";
-        store.write(disconfFileNode, value);
+        store.write(disconfFileNode, value,"","");
         System.out.printf("Set %s to %s\n", disconfFileNode, value);
         TimeUnit.SECONDS.sleep(random.nextInt(5));
     }

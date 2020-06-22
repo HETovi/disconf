@@ -99,7 +99,6 @@ public class ConfigFetcherController extends BaseController {
         return configFetchMgr.getConfItemByParameter(configModel.getApp().getId(), configModel.getEnv().getId(),
                 configModel.getVersion(), configModel.getKey());
     }
-
     /**
      * 获取配置文件
      *

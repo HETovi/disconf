@@ -14,7 +14,7 @@ import lombok.Data;
  */
 //edit by hetw25334 修改表名信息 原先为config 现在为disconf_config
 @Data
-@Table(db = DB.DB_NAME, name = "disconf_config", keyColumn = Columns.CONFIG_ID)
+@Table(db = DB.DB_NAME, name = "config", keyColumn = Columns.CONFIG_ID)
 public class Config extends BaseObject<Long> {
 
     /**

@@ -13,7 +13,8 @@ import com.github.knightliao.apollo.db.bo.BaseObject;
  * @version 2013-11-28
  */
 //edit by hetw25334 修改表名信息 原先为user 现在为disconf_user
-@Table(db = DB.DB_NAME, name = "disconf_user", keyColumn = Columns.USER_ID)
+//先本地测试MySQL版本的
+@Table(db = DB.DB_NAME, name = "user", keyColumn = Columns.USER_ID)
 public class User extends BaseObject<Long> {
 
     private static final long serialVersionUID = 1L;

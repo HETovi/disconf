@@ -16,6 +16,7 @@ import com.github.knightliao.apollo.utils.common.StringUtil;
 @Target(ElementType.TYPE)
 public @interface Table {
 
+
     /**
      * 在哪个DB中
      *

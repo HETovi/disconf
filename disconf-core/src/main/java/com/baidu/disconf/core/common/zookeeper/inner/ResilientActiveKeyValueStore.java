@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.Watcher;
@@ -51,7 +52,7 @@ public class ResilientActiveKeyValueStore extends ConnectionWatcher {
      * @author liaoqiqi
      * @date 2013-6-14
      */
-    public void write(String path, String value) throws InterruptedException, KeeperException {
+    public void write(String path, String value,String scheme,String auth) throws InterruptedException, KeeperException {
 
         //add by hetw25334 新增ACL配置
         int retries = 0;
@@ -62,8 +63,14 @@ public class ResilientActiveKeyValueStore extends ConnectionWatcher {
                 Stat stat = zk.exists(path, false);
 
                 if (stat == null) {
-                    zk.create(path, value.getBytes(CHARSET), Ids.CREATOR_ALL_ACL, CreateMode.PERSISTENT);
-                    //zk.create(path, value.getBytes(CHARSET), Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+                    //根据传入的scheme信息以及auth信息判断是否需要加ACL策略
+                    if(!StringUtils.isBlank(scheme) && !StringUtils.isBlank(auth)){
+                        zk.create(path, value.getBytes(CHARSET), Ids.CREATOR_ALL_ACL, CreateMode.PERSISTENT);
+                    }else{
+                        zk.create(path, value.getBytes(CHARSET), Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+                    }
+
+
 
                 } else {
 
@@ -103,7 +110,7 @@ public class ResilientActiveKeyValueStore extends ConnectionWatcher {
      * @author liaoqiqi
      * @date 2013-6-14
      */
-    public String createEphemeralNode(String path, String value, CreateMode createMode)
+    public String createEphemeralNode(String path, String value, CreateMode createMode,String scheme,String auth)
         throws InterruptedException, KeeperException {
 
         int retries = 0;
@@ -115,8 +122,14 @@ public class ResilientActiveKeyValueStore extends ConnectionWatcher {
 
                 if (stat == null) {
                     //add by hetw25334
-                    return zk.create(path, value.getBytes(CHARSET), Ids.CREATOR_ALL_ACL, createMode);
-                    //return zk.create(path, value.getBytes(CHARSET), Ids.OPEN_ACL_UNSAFE, createMode);
+                    //增加ACL分支
+                    if(!StringUtils.isBlank(scheme) && !StringUtils.isBlank(auth)){
+                        return zk.create(path, value.getBytes(CHARSET), Ids.CREATOR_ALL_ACL, createMode);
+                    }else{
+                        return zk.create(path, value.getBytes(CHARSET), Ids.OPEN_ACL_UNSAFE, createMode);
+                    }
+
+
 
                 } else {
 
@@ -225,6 +238,7 @@ public class ResilientActiveKeyValueStore extends ConnectionWatcher {
         List<String> children = new ArrayList<String>();
         try {
             children = zk.getChildren("/", false);
+
         } catch (KeeperException e) {
             LOGGER.error(e.toString());
         } catch (InterruptedException e) {

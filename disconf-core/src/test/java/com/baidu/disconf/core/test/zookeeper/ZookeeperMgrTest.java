@@ -61,7 +61,7 @@ public class ZookeeperMgrTest {
 
             // 写
             String url = "/disconfserver/dan_dnwebbilling_1_0_online";
-            ZookeeperMgr.getInstance().writePersistentUrl(url, String.valueOf(randomInt));
+            ZookeeperMgr.getInstance().writePersistentUrl(url, String.valueOf(randomInt),"","");
 
             // 读
             String readData = ZookeeperMgr.getInstance().readUrl(url, null);

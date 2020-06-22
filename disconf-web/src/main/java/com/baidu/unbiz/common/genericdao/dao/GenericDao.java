@@ -330,10 +330,24 @@ public abstract class GenericDao<KEY extends Serializable, ENTITY extends BaseOb
                 queryGenerator.getSelectQuery(matches, (order == null) ? null : order.toArray(new Order[order.size()]));
         String sql = operate.getSql();
         List<Object> params = operate.getParams();
+        //中间变量
+        /*List<Object> tmpParams = new ArrayList<Object>();
+        for(Object object:params){
+            tmpParams.add(object);
+        }*/
+
 
         if (offset != 0 || limit != 0) {
+            //由于oracle中不支持limit 使用rownum的方式
             sql = sql + " limit ?, ?";
+            //sql = sql + " and rownum >= ? minus "+sql+" and rownum <= ?";
             params.add(offset);
+
+            //重复添加一遍
+            /*for(Object object:tmpParams){
+                params.add(object);
+            }*/
+
             params.add(limit);
         }
 

@@ -31,7 +31,8 @@ public class ResilientActiveKeyValueStoreMock extends ResilientActiveKeyValueSto
     }
 
     @Override
-    public void write(String path, String value) throws InterruptedException, KeeperException {
+    //add by hetw25334
+    public void write(String path, String value,String scheme,String auth) throws InterruptedException, KeeperException {
 
         map.put(path, value);
 
@@ -39,7 +40,8 @@ public class ResilientActiveKeyValueStoreMock extends ResilientActiveKeyValueSto
     }
 
     @Override
-    public String createEphemeralNode(String path, String value, CreateMode createMode)
+    //add by hetw25334
+    public String createEphemeralNode(String path, String value, CreateMode createMode,String scheme,String auth)
         throws InterruptedException, KeeperException {
 
         map.put(path, value);
